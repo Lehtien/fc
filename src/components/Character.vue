@@ -72,7 +72,7 @@ export default {
       //if (transition != null) {
       //console.log(visible + "!");
       if (transition != null) {
-        console.log(transition);
+        //console.log(transition);
         self.finished = false;
         transition.addEventListener("transitionend", function fin(e) {
           //console.log("Transition ended");
@@ -85,7 +85,7 @@ export default {
           //e.stopPropagation();
           transition.removeEventListener("transitionend", fin);
           self.finished = true;
-          console.log(self.finished);
+          //console.log(self.finished);
         });
       }
     }

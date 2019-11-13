@@ -1,15 +1,18 @@
 <template>
   <div id="whole">
-    <Top/>
-    <Members/>
-    <!-- <SS/> -->
-    <!-- <div class="cursor" id="cursor"></div> -->
-    <!--<div class="follower"></div> -->
+    <div id="loading">
+      <Loading/>
+    </div>
+    <div id="contents" class="waiting">
+      <!-- <Top/>
+      <Members/> -->
+      <SS/>
+    </div>
   </div>
 </template>
 
 <script>
-//import HelloWorld from "./HelloWorld"
+import Loading from "./Loading";
 import Top from "./Top";
 import Members from "./Members";
 import SS from "./SS";
@@ -17,12 +20,20 @@ import SS from "./SS";
 export default {
   //name: "App",
   components: {
+    Loading,
     Top,
     Members,
     SS
+  },
+  mounted() {
+    const loading = document.getElementById("loading");
+    const contents = document.getElementById("contents");
+    loading.style.display = "none";
+    contents.classList.remove("waiting");
   }
 };
 
+// cursol, stalker
 const cursor = document.createElement("div"); //divタグを作成
 cursor.id = "cursor"; //IDを付与
 document.body.appendChild(cursor); //bodyの最後に挿入
@@ -31,9 +42,6 @@ const stalker = document.createElement("div");
 stalker.id = "stalker";
 document.body.appendChild(stalker);
 
-//const cursor = document.getElementById("cursor");
-//console.log(document.getElementById("cursor"));
-
 document.addEventListener("mousemove", function(e) {
   cursor.style.transform = `translate(${e.clientX}px,${
     e.clientY
@@ -41,10 +49,6 @@ document.addEventListener("mousemove", function(e) {
   stalker.style.transform = `translate(${e.clientX}px,${
     e.clientY
   }px) rotate(30deg)`;
-  //cursor.style.left = e.clientX + 'px';
-  //console.log(e.clientX);
-  //console.log(cursor.style.transform);
-  //console.log(e.clientX);
 });
 </script>
 
@@ -57,7 +61,13 @@ body {
   overflow-x: hidden;
   height: 100%;
 
-  background: black;
+  background: rgb(0, 0, 0);
+
+  animation: fadeIn 1s ease 0s 1 normal;
+}
+
+.waiting {
+  display: none;
 }
 
 #cursor {
@@ -89,5 +99,15 @@ body {
   z-index: 999;
 
   border: solid 3px #000000;
+}
+
+// fade
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>
