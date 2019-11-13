@@ -1,8 +1,8 @@
 <template>
   <section>
     <Character position="true" imgsrc="images/logo.png"/>
-    <!-- <Character imgsrc="Abc"/> -->
-    <!-- <Character position="true"/> -->
+    <Character imgsrc="images/logo.png"/>
+    <Character position="true"/>
     <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri"/>
   </section>
 </template>

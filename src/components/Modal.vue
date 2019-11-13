@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     Show() {
-      console.log(this.showContent);
+      //console.log(this.showContent);
       // const overlay = document.querySelector(".overlay");
       // if (this.showContent) {
       //   disableBodyScroll(overlay);

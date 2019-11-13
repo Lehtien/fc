@@ -30,8 +30,8 @@ export default {
   },
   data() {
     return {
-      isVisible: false,
-      finished: false
+      isVisible: true,
+      finished: true
       //showContent: false,
       //imgUri: null
       //canvas: null,
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     visibilityChanged(isVisible, entry) {
-      console.log(this.imgsrc);
+      //console.log(this.imgsrc);
       this.isVisible = isVisible;
       if (!this.isVisible) {
         //this.isVisible = isVisible;
@@ -59,28 +59,34 @@ export default {
   },
   watch: {
     isVisible() {
-      const transition = document.querySelector(".img");
-      //console.log(transition)
-      const visible = this.isVisible;
-      this.finished = false;
+      const self = this;
+      //const visible = this.isVisible;
       //console.log(this.isVisible + "!");
-      console.log(transition);
-      console.log(visible);
+      //this.finished = false;
+      //console.log(this.finished + ": ??");
+      //console.log(this.isVisible + ": is V");
+      //this.finished = false;
+      //if (this.isVisible) {
+      const transition = this.$el.querySelector(".img.active"); //document.querySelector(".img");
+      //console.log(transition + "is T if");
+      //if (transition != null) {
+      //console.log(visible + "!");
       if (transition != null) {
-        if (visible) {
-          console.log(visible + "!");
-          transition.addEventListener("transitionend", e => {
-            //console.log("Transition ended");
-            //e.stopPropagation();
-            console.log(this.imgsrc);
-            e.stopImmediatePropagation();
-            if (e.propertyName === "opacity") {
-              console.log(e.propertyName);
-              this.finished = true;
-            }
-            //transition.removeEventListener("transitionend", finished);
-          });
-        }
+        console.log(transition);
+        self.finished = false;
+        transition.addEventListener("transitionend", function fin(e) {
+          //console.log("Transition ended");
+          //e.stopPropagation();
+          //this.finished = false;
+          //if (e.propertyName === "boxshadow") {
+
+          //e.stopImmediatePropagation();
+          //}
+          //e.stopPropagation();
+          transition.removeEventListener("transitionend", fin);
+          self.finished = true;
+          console.log(self.finished);
+        });
       }
     }
   },
@@ -218,8 +224,14 @@ export default {
   }
   .img.active {
     transform: translateX($pos);
-    transition: transform 2s, opacity 2s;
+    transition: transform 2s, opacity 2s, box-shadow 1s;
     opacity: 1;
+  }
+  .img.active.finish:hover {
+    box-shadow: 6px 3px 3px rgba(255, 255, 255, 1);
+    //transform: translateX($pos);
+    transform: translate(calc(#{$pos} - 10px), -10px);
+    transition: transform 1s, box-shadow 1s;
   }
   .chrName {
     position: absolute;
