@@ -1,13 +1,16 @@
 <template>
   <div id="whole">
-    <div id="loading">
+    <!-- <div id="loading">
       <Loading/>
     </div>
     <div id="contents" class="waiting">
       <Top/>
       <Members/>
       <SS/>
-    </div>
+    </div>-->
+    <Top/>
+    <a v-scroll-to="'#whole'" class="scroll-top" v-show="isTopBtn">Top Page</a>
+    <div class="arrow"></div>
   </div>
 </template>
 
@@ -25,14 +28,34 @@ export default {
     Members,
     SS
   },
+  data() {
+    return {
+      scrollY: 0
+    };
+  },
   mounted() {
-    const loading = document.getElementById("loading");
-    const contents = document.getElementById("contents");
-    loading.style.display = "none";
-    contents.classList.remove("waiting");
+    // const loading = document.getElementById("loading");
+    // const contents = document.getElementById("contents");
+    // loading.style.display = "none";
+    // contents.classList.remove("waiting");
+    window.addEventListener("scroll", this.onScroll);
+    this.onScroll();
+  },
+  computed: {
+    isTopBtn() {
+      //console.log(window.pageYOffset);
+      console.log(window.scrollY);
+      return window.pageYOffset > 200 ? true : false;
+    }
+  },
+  methods: {
+    // スクロール値の取得
+    onScroll() {
+      console.log("!");
+      this.scrollY = window.pageYOffset;
+    }
   }
 };
-
 // cursol, stalker
 const cursor = document.createElement("div"); //divタグを作成
 cursor.id = "cursor"; //IDを付与
@@ -109,5 +132,47 @@ body {
   100% {
     opacity: 1;
   }
+}
+
+// scroll arrow
+.arrow {
+  display: block;
+  position: fixed;
+  //top: 0;
+  bottom: 15px;
+  left: calc(50% - 16px);
+  //left: 0;
+  //right: 0;
+  //margin: auto;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid rgb(255, 255, 255);
+  border-right: 2px solid rgb(255, 255, 255);
+  //transform: rotate(135deg);
+  //opacity: 0.5;
+  animation: sdb 3s infinite;
+}
+
+@keyframes sdb {
+  0% {
+    transform: rotate(135deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(135deg) translate(7px, -7px);
+    opacity: 0;
+  }
+}
+
+// go to top
+.scroll-top {
+  font-size: 10px;
+  color: white;
+  position: fixed;
+  top: 10px;
+  right: 20px;
 }
 </style>

@@ -9,7 +9,8 @@
 
 <style lang="scss" scoped>
 #img1 {
-  max-width: 100%;
+  box-sizing: border-box;
+  width: 100%;
   border: solid #860ecc;
 }
 </style>

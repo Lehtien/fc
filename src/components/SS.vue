@@ -1,5 +1,6 @@
 <template>
   <div v-observe-visibility="visibilityChanged">
+    <h3 :class="{activeSS:isVisible}">ScreenShots</h3>
     <div class="loop_ss" :class="{activeSS:isVisible}">
       <div class="ss">
         <input
@@ -110,8 +111,8 @@ export default {
 
 // common
 .activeSS {
-  transform: translateX(10px);
-  transition: opacity 1s;
+  //transform: translateX(10px);
+  transition: opacity 1.5s;
   opacity: 1;
 }
 .ss_img {
@@ -139,6 +140,22 @@ export default {
   to {
     transform: translateX(-100%);
   }
+}
+
+// text
+h3 {
+  font-style: italic;
+  text-decoration: underline;
+  position: relative;
+  left: 20px;
+  transform: rotate(-5deg);
+  display: inline-block;
+  opacity: 0;
+  will-change: opacity;
+}
+h3.activeSS {
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 </style>
 

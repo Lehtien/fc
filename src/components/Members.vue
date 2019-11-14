@@ -1,5 +1,6 @@
 <template>
   <section>
+    <h3 :class="{txtmember:flg}" v-observe-visibility="visibilityChanged">MEMBERS</h3>
     <Character position="true" imgsrc="images/logo.png"/>
     <Character imgsrc="images/logo.png"/>
     <Character position="true" imgsrc="images/wallpaper.jpg"/>
@@ -20,14 +21,37 @@ export default {
   data() {
     return {
       showContent: false,
-      imgUri: ""
+      imgUri: "",
+      flg: false
     };
   },
   methods: {
     isShow() {
       this.showContent = false;
+    },
+    visibilityChanged(isVisible, entry) {
+      this.flg = isVisible;
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+h3 {
+  font-style: italic;
+  text-decoration: underline;
+  position: relative;
+  left: 20px;
+  transform: rotate(-5deg);
+  display: inline-block;
+  opacity: 0;
+   will-change: opacity;
+}
+
+h3.txtmember {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+</style>
+
 
