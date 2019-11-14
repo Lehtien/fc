@@ -27,8 +27,4 @@ export default {
   color: #2c3e50;
   /*margin-top: 60px;*/
 }
-html {
-  overflow-x: hidden;
-  height: 100%;
-}
 </style>

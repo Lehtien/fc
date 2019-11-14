@@ -4,8 +4,8 @@
       <Loading/>
     </div>
     <div id="contents" class="waiting">
-      <!-- <Top/>
-      <Members/> -->
+      <Top/>
+      <Members/>
       <SS/>
     </div>
   </div>

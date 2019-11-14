@@ -32,29 +32,18 @@ export default {
     return {
       isVisible: true,
       finished: true
-      //showContent: false,
-      //imgUri: null
-      //canvas: null,
-      // ctx: null
     };
   },
   methods: {
     visibilityChanged(isVisible, entry) {
-      //console.log(this.imgsrc);
       this.isVisible = isVisible;
       if (!this.isVisible) {
         //this.isVisible = isVisible;
       }
     },
     openModal(event) {
-      //this.showContent = true;
-      //this.imgUri = event.target.src;
       this.$parent.showContent = true;
-      //console.log(this.$parent.showContent);
       this.$parent.imgUri = event.target.src;
-      //console.log(this.$parent.imgUri);
-      //console.log(this.imgUri);
-      //this.$Members.showContent = true;
     }
   },
   watch: {
@@ -67,7 +56,7 @@ export default {
       //console.log(this.isVisible + ": is V");
       //this.finished = false;
       //if (this.isVisible) {
-      const transition = this.$el.querySelector(".img.active"); //document.querySelector(".img");
+      const transition = this.$el.querySelector(".img.active");
       //console.log(transition + "is T if");
       //if (transition != null) {
       //console.log(visible + "!");
@@ -90,30 +79,6 @@ export default {
       }
     }
   },
-  // directives: {
-  //   scroll: {
-  //     inserted: function(el, binding) {
-  //       let f = function(evt) {
-  //         if (binding.value(evt, el)) {
-  //           window.removeEventListener("scroll", f);
-  //         }
-  //       };
-  //       window.addEventListener("scroll", f);
-  //     }
-  //   }
-  // },
-  // methods: {
-  //   handleScroll: function(evt, el) {
-  //     console.log(this.offset());
-  //     if (window.scrollY > this.offset().top) {
-  //       el.setAttribute(
-  //         "style",
-  //         "opacity: 1; transform: translate3d(0, -10px, 0)"
-  //       );
-  //     }
-  //     return window.scrollY > 100;
-  //   }
-  // },
   mounted() {
     //this.canvas = document.getElementById("square");
     const canvas = document.getElementById("square");
@@ -134,11 +99,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$diff: -5px;
+
+// Left
 .imgblock.L {
   overflow: hidden;
   position: relative;
-  /* position: absolute; */
-  /* left: 10px; */
   min-height: 300px;
 
   #square {
@@ -155,24 +121,24 @@ export default {
     opacity: 1;
   }
   .img {
-    height: 300px;
+    height: auto;
+    max-width: 40vw;
     position: absolute;
     left: 0;
-    top: 0;
-    width: 50%; //height: 500px;
+    top: 10px;
     transform: translateX(-150%);
     opacity: 0;
     cursor: none;
   }
   .img.active {
     transform: translateX(10px);
-    transition: transform 2s, opacity 2s, box-shadow 1s;
+    transition: transform 2s, opacity 3s, box-shadow 1s;
     opacity: 1;
   }
 
   .img.active.finish:hover {
     box-shadow: 6px 3px 3px rgba(255, 255, 255, 1);
-    transform: translateY(-10px);
+    transform: translate(calc(10px + #{$diff}), $diff);
     transition: transform 1s, box-shadow 1s;
   }
 
@@ -192,45 +158,57 @@ export default {
   }
 }
 
+// Right
 .imgblock.R {
   $pos: calc(100% - 10px);
+
   overflow: hidden;
   position: relative;
   min-height: 300px;
-  /* position: absolute; */
-  /* left: 10px; */
+
   #square {
     background: #666;
-    width: 50%;
+    //width: 40%;
+    
     height: 300px;
+    max-width: 60%;
+    position: absolute;
+    right: -50%;
     /* transition: all 300ms 0s ease; */
-    transform: translateX(200%);
+    //transform: translateX(200%);
     opacity: 0;
   }
   #square.active {
-    transform: translateX($pos);
-    transition: transform 1s, opacity 1s;
+    //transform: translateX($pos);
+        right: 10px;
+    transition: right 1s, opacity 1s;
     opacity: 1;
   }
   .img {
-    height: 300px;
+    height: auto;
+    max-width: 40%;
     position: absolute;
-    left: 0;
+    top:10px;
+    right: -100%;
+    /*left: 0;
     top: 0;
-    width: 50%; //height: 500px;
-    transform: translateX(250%);
+    */
+    //transform: translateX(250%);
     opacity: 0;
     cursor: none;
   }
   .img.active {
-    transform: translateX($pos);
-    transition: transform 2s, opacity 2s, box-shadow 1s;
+
+    right: 10px;
+    //transform: translateX($pos);
+    transition: right 2s, transform 2s, opacity 3s, box-shadow 1s;
     opacity: 1;
   }
   .img.active.finish:hover {
     box-shadow: 6px 3px 3px rgba(255, 255, 255, 1);
     //transform: translateX($pos);
-    transform: translate(calc(#{$pos} - 10px), -10px);
+    //transform: translate(calc(#{$pos} + #{$diff}), $diff);
+    transform: translate(-5px, -5px);
     transition: transform 1s, box-shadow 1s;
   }
   .chrName {

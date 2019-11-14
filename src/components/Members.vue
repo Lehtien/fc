@@ -2,7 +2,7 @@
   <section>
     <Character position="true" imgsrc="images/logo.png"/>
     <Character imgsrc="images/logo.png"/>
-    <Character position="true"/>
+    <Character position="true" imgsrc="images/wallpaper.jpg"/>
     <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri"/>
   </section>
 </template>

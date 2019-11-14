@@ -2,30 +2,42 @@
   <div v-observe-visibility="visibilityChanged">
     <div class="loop_ss" :class="{activeSS:isVisible}">
       <div class="ss">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          src="images/wallpaper.jpg"
+          alt="NoImage"
+        >
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
       </div>
       <div class="ss">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          src="images/wallpaper.jpg"
+          alt="NoImage"
+        >
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
       </div>
     </div>
     <div class="loop_ss_rev" :class="{activeSS:isVisible}">
       <div class="ss">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
       </div>
       <div class="ss">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
       </div>
     </div>
     <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri"/>
@@ -102,13 +114,13 @@ export default {
   transition: opacity 1s;
   opacity: 1;
 }
-.img {
-  max-width: 30vw;
-  height: auto;
+.ss_img {
+  align-self: center;
+  width: 30vw;
   cursor: none;
   transition: transform 1s, box-shadow 1s;
 }
-.img:hover {
+.ss_img:hover {
   box-shadow: 3px 1px 3px rgba(255, 255, 255, 1);
   transform: translateY(-1px);
   transition: transform 1s, box-shadow 1s;
