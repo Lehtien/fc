@@ -9,7 +9,11 @@
       <SS/>
     </div>-->
     <Top/>
-    <a v-scroll-to="'#whole'" class="scroll-top" v-show="isTopBtn">Top Page</a>
+    <Members/>
+    <SS/>
+    <transition name="toppage">
+      <a v-scroll-to="'#whole'" class="scroll-top" v-show="isTopBtn">↑ Top</a>
+    </transition>
     <div class="arrow"></div>
   </div>
 </template>
@@ -30,28 +34,24 @@ export default {
   },
   data() {
     return {
-      scrollY: 0
+      scrollY: 0,
+      windowWidth: 0
     };
   },
   mounted() {
-    // const loading = document.getElementById("loading");
-    // const contents = document.getElementById("contents");
-    // loading.style.display = "none";
-    // contents.classList.remove("waiting");
     window.addEventListener("scroll", this.onScroll);
-    this.onScroll();
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll);
   },
   computed: {
     isTopBtn() {
-      //console.log(window.pageYOffset);
-      console.log(window.scrollY);
-      return window.pageYOffset > 200 ? true : false;
+      return this.scrollY > 300 ? true : false;
     }
   },
   methods: {
     // スクロール値の取得
     onScroll() {
-      console.log("!");
       this.scrollY = window.pageYOffset;
     }
   }
@@ -81,8 +81,8 @@ body {
   position: relative;
   cursor: none;
   margin: 0;
-  overflow-x: hidden;
-  height: 100%;
+  //@at-root
+  //height: 100%;
 
   background: rgb(0, 0, 0);
 
@@ -140,10 +140,10 @@ body {
   position: fixed;
   //top: 0;
   bottom: 15px;
-  left: calc(50% - 16px);
-  //left: 0;
-  //right: 0;
-  //margin: auto;
+  //left: 50vw; //calc(50% - 16px);
+  left: 0;
+  right: 0;
+  margin: auto;
   width: 14px;
   height: 14px;
   border-top: 2px solid rgb(255, 255, 255);
@@ -169,10 +169,37 @@ body {
 
 // go to top
 .scroll-top {
-  font-size: 10px;
+  font-size: 14px;
   color: white;
   position: fixed;
   top: 10px;
   right: 20px;
+  opacity: 0.5;
+
+  display: inline-block;
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    content: "";
+    width: 0;
+    height: 1px;
+    background-color: #ffffff;
+    transition: 0.3s;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+.toppage-enter-active,
+.toppage-leave-active {
+  transition: opacity 1s;
+}
+.toppage-enter,
+.toppage-leave-to {
+  opacity: 0;
 }
 </style>

@@ -94,7 +94,7 @@ export default {
   .ss {
     animation: infinity-loop 30s infinite linear 1s both;
   }
-  //overflow: hidden;
+  overflow: hidden;
 }
 .loop_ss_rev {
   position: relative;
@@ -107,6 +107,7 @@ export default {
   .ss {
     animation: infinity-loop 30s infinite reverse linear 1s both;
   }
+  overflow: hidden;
 }
 
 // common
