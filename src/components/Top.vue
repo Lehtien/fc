@@ -1,5 +1,5 @@
 <template>
-  <img id="img1" src="images/logo.png">
+  <img id="img1" src="../assets/875earth.jpg">
   <!-- <article>AAA</article> -->
 </template>
 
