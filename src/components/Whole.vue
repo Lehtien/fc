@@ -15,6 +15,7 @@
       <a v-scroll-to="'#whole'" class="scroll-top" v-show="isTopBtn">↑ Top</a>
     </transition>
     <div class="arrow" v-show="showArrow"></div>
+    <article id="rights">abcdefghijk</article>
   </div>
 </template>
 
@@ -246,5 +247,12 @@ body {
 .toppage-enter,
 .toppage-leave-to {
   opacity: 0;
+}
+
+// All rights reserved
+#rights {
+  text-align: center;
+  margin: 30px 0 30px 0;
+  color: rgba(255, 255, 255, 0.7);
 }
 </style>
