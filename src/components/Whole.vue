@@ -154,7 +154,7 @@ body {
   background: rgba(0, 0, 0, 0);
   //border-radius: 50%;
   //transform: translate(0, 0) rotate(30deg);
-  transition: transform 0.3s; //ちょっと遅れてついてくるように
+  transition: transform 0.5s; //ちょっと遅れてついてくるように
   //animation: spin 5s linear infinite;
   transition-timing-function: ease-out;
   z-index: 999;
