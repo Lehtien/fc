@@ -14,7 +14,7 @@
     <transition name="toppage">
       <a v-scroll-to="'#whole'" class="scroll-top" v-show="isTopBtn">↑ Top</a>
     </transition>
-    <div class="arrow"></div>
+    <div class="arrow" v-show="showArrow"></div>
   </div>
 </template>
 
@@ -35,7 +35,8 @@ export default {
   data() {
     return {
       scrollY: 0,
-      windowWidth: 0
+      windowWidth: 0,
+      showArrow: true
     };
   },
   mounted() {
@@ -53,6 +54,17 @@ export default {
     // スクロール値の取得
     onScroll() {
       this.scrollY = window.pageYOffset;
+
+      const windowBottom =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      if (this.scrollY >= windowBottom) {
+        this.showArrow = false;
+      } else {
+        this.showArrow = true;
+      }
+      //console.log("Y:" + this.scrollY);
+      //console.log(document.documentElement.scrollHeight - document.documentElement.clientHeight);
     }
   }
 };
@@ -65,13 +77,20 @@ const stalker = document.createElement("div");
 stalker.id = "stalker";
 document.body.appendChild(stalker);
 
+const stalker2 = document.createElement("div");
+stalker2.id = "stalker2";
+document.body.appendChild(stalker2);
+
 document.addEventListener("mousemove", function(e) {
   cursor.style.transform = `translate(${e.clientX}px,${
     e.clientY
-  }px) rotate(-10deg)`;
+  }px) rotate(-20deg)`;
   stalker.style.transform = `translate(${e.clientX}px,${
     e.clientY
-  }px) rotate(30deg)`;
+  }px) rotate3d(-1, -1, 0, 30deg) perspective(100px)`;
+  stalker2.style.transform = `translate(${e.clientX}px,${
+    e.clientY
+  }px) rotate3d(1, 1, 1, 30deg) perspective(100px)`;
 });
 </script>
 
@@ -94,13 +113,13 @@ body {
 }
 
 #cursor {
-  transform: translate(0px, 0px);
+  //transform: translate(0px, 0px);
   pointer-events: none;
   position: fixed;
   top: -4px; //座標調節（カーソル位置と円の中心を合わせる）
   left: -4px; //座標調節（カーソル位置と円の中心を合わせる）
-  width: 20px; //カーソルの直径
-  height: 20px; //カーソルの直径
+  width: 10px; //カーソルの直径
+  height: 10px; //カーソルの直径
   background: rgba(90, 86, 86, 0.75);
   //border-radius: 50%;
   z-index: 999;
@@ -110,18 +129,44 @@ body {
 #stalker {
   pointer-events: none;
   position: fixed;
-  top: -8px; //座標調節（カーソル位置と円の中心を合わせる）
-  left: -8px; //座標調節（カーソル位置と円の中心を合わせる）
-  width: 40px; //マウスストーカーの直径
-  height: 40px; //マウスストーカーの直径
+  top: -13px; //座標調節（カーソル位置と円の中心を合わせる）
+  left: -13px; //座標調節（カーソル位置と円の中心を合わせる）
+  width: 30px; //マウスストーカーの直径
+  height: 30px; //マウスストーカーの直径
   background: rgba(0, 0, 0, 0);
   //border-radius: 50%;
-  transform: translate(0, 0) rotate(30deg);
+  //transform: translate(0, 0) rotate(30deg);
   transition: transform 0.2s; //ちょっと遅れてついてくるように
+  //animation: spin 5s linear infinite;
   transition-timing-function: ease-out;
   z-index: 999;
 
-  border: solid 3px #000000;
+  border: solid 1px #000000;
+}
+#stalker2 {
+  pointer-events: none;
+  position: fixed;
+  top: -15px; //座標調節（カーソル位置と円の中心を合わせる）
+  left: -15px; //座標調節（カーソル位置と円の中心を合わせる）
+  width: 30px; //マウスストーカーの直径
+  height: 30px; //マウスストーカーの直径
+  background: rgba(0, 0, 0, 0);
+  //border-radius: 50%;
+  //transform: translate(0, 0) rotate(30deg);
+  transition: transform 0.3s; //ちょっと遅れてついてくるように
+  //animation: spin 5s linear infinite;
+  transition-timing-function: ease-out;
+  z-index: 999;
+
+  border: solid 1px #ffffff;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 // fade
