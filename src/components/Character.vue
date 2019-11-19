@@ -16,14 +16,7 @@
 </template>
 
 <script>
-// let canvas = document.getElementById('square');
-// if (canvas.getContext){
-//   var ctx = canvas.getContext('2d');
-//   // drawing code here
-// }
-
 export default {
-  //props: ["position"],
   props: {
     position: String,
     imgsrc: String
@@ -44,6 +37,10 @@ export default {
     openModal(event) {
       this.$parent.showContent = true;
       this.$parent.imgUri = event.target.src;
+
+      const currentScrollY = window.pageYOffset;
+      document.querySelector("body").style.position = "fixed";
+      document.querySelector("body").style.top = `-${currentScrollY}px`;
     }
   },
   watch: {

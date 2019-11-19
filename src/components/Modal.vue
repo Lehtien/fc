@@ -16,6 +16,9 @@ export default {
   },
   methods: {
     closeModal: function() {
+      document.querySelector("body").style.position = "relative";
+      document.querySelector("body").style.top = "";
+      window.scrollTo(0, 400);
       this.$emit("isS");
     }
   }
@@ -43,6 +46,7 @@ export default {
     width: 40vw;
   }
 }
+
 // transition fade
 .fade-enter-active,
 .fade-leave-active {

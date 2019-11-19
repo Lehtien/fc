@@ -55,7 +55,6 @@ export default {
     // スクロール値の取得
     onScroll() {
       this.scrollY = window.pageYOffset;
-
       const windowBottom =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
@@ -99,16 +98,21 @@ document.addEventListener("mousemove", function(e) {
 html,
 body {
   position: relative;
+  //position: fixed;
+  width: 100%;
   cursor: none;
   margin: 0;
+  padding: 0;
   //@at-root
-  //height: 100%;
+  height: 100%;
 
   background: rgb(0, 0, 0);
-
   animation: fadeIn 1s ease 0s 1 normal;
 }
-
+html {
+  overflow-x: hidden;
+   overflow-y:scroll;
+}
 .waiting {
   display: none;
 }
