@@ -105,12 +105,12 @@ $diff: -5px;
 .imgblock.L {
   overflow: hidden;
   position: relative;
-  min-height: 300px;
-
+  height: 40vw;
+  //margin-bottom: 10%;
   #square {
     background: #666;
-    width: 50%;
-    height: 300px;
+    width: 60vw;
+    //height: 300px;
     /* transition: all 300ms 0s ease; */
     transform: translateX(-100%);
     opacity: 0;
@@ -122,9 +122,9 @@ $diff: -5px;
   }
   .img {
     height: auto;
-    max-width: 40vw;
+    max-width: 60vw;
     position: absolute;
-    left: 0;
+    left: 10px;
     top: 10px;
     transform: translateX(-150%);
     opacity: 0;
@@ -144,11 +144,12 @@ $diff: -5px;
 
   .chrName {
     position: absolute;
-    left: 45%;
+    left: 55%;
     bottom: 20%;
     transform: translateY(-20px);
     opacity: 0;
     color: beige;
+    font-size: 4vw;
   }
   .chrName.active {
     transform: rotate3d(1, 1, 0, 30deg);
@@ -164,29 +165,30 @@ $diff: -5px;
 
   overflow: hidden;
   position: relative;
-  min-height: 300px;
+  height: 41vw;
 
   #square {
     background: #666;
     //width: 40%;
     
-    height: 300px;
-    max-width: 60%;
+    //height: 300px;
+    //max-width: 60%;
     position: absolute;
-    right: -50%;
+    right:-50px;
+    width:75vw;
     /* transition: all 300ms 0s ease; */
     //transform: translateX(200%);
     opacity: 0;
   }
   #square.active {
     //transform: translateX($pos);
-        right: 10px;
+    right: 10px;
     transition: right 1s, opacity 1s;
     opacity: 1;
   }
   .img {
     height: auto;
-    max-width: 40%;
+    max-width: 60vw;
     position: absolute;
     top:10px;
     right: -100%;
@@ -199,7 +201,7 @@ $diff: -5px;
   }
   .img.active {
 
-    right: 10px;
+    right: 20px;
     //transform: translateX($pos);
     transition: right 2s, transform 2s, opacity 3s, box-shadow 1s;
     opacity: 1;
