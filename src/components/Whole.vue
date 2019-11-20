@@ -95,6 +95,17 @@ document.addEventListener("mousemove", function(e) {
     e.clientY
   }px) rotate3d(1, 1, 1, 30deg) perspective(100px)`;
 });
+
+document.addEventListener("mouseleave", e => {
+  cursor.style.opacity = "0";
+  stalker.style.opacity = "0";
+  stalker2.style.opacity = "0";
+});
+document.addEventListener("mouseenter", e => {
+  cursor.style.opacity = "1";
+  stalker.style.opacity = "1";
+  stalker2.style.opacity = "1";
+});
 </script>
 
 <style lang="scss">
@@ -103,7 +114,7 @@ body {
   position: relative;
   //position: fixed;
   width: 100%;
-  cursor: none;
+  //cursor: none;
   margin: 0;
   padding: 0;
   //@at-root
@@ -132,6 +143,7 @@ html {
   //border-radius: 50%;
   z-index: 999;
   //transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
+  transition: opacity 0.3s ease-in-out;
 }
 
 #stalker {
@@ -144,7 +156,7 @@ html {
   background: rgba(0, 0, 0, 0);
   //border-radius: 50%;
   //transform: translate(0, 0) rotate(30deg);
-  transition: transform 0.2s; //ちょっと遅れてついてくるように
+  transition: transform 0.2s, opacity 0.3;
   //animation: spin 5s linear infinite;
   transition-timing-function: ease-out;
   z-index: 999;
@@ -161,7 +173,7 @@ html {
   background: rgba(0, 0, 0, 0);
   //border-radius: 50%;
   //transform: translate(0, 0) rotate(30deg);
-  transition: transform 0.5s; //ちょっと遅れてついてくるように
+  transition: transform 0.5s, opacity 0.5s;
   //animation: spin 5s linear infinite;
   transition-timing-function: ease-out;
   z-index: 999;
