@@ -74,6 +74,8 @@ export default {
     }
   }
 };
+let cursorX;
+let cursorY;
 // cursol, stalker
 const cursor = document.createElement("div"); //divタグを作成
 cursor.id = "cursor"; //IDを付与
@@ -87,16 +89,19 @@ const stalker2 = document.createElement("div");
 stalker2.id = "stalker2";
 document.body.appendChild(stalker2);
 
-document.addEventListener("mousemove", function(e) {
+document.addEventListener("mousemove", e => {
   cursor.style.transform = `translate(${e.clientX}px,${
     e.clientY
-  }px) rotate(-20deg)`;
+  }px) rotate(45deg)`;
   stalker.style.transform = `translate(${e.clientX}px,${
     e.clientY
   }px) rotate3d(-1, -1, 0, 30deg) perspective(100px)`;
   stalker2.style.transform = `translate(${e.clientX}px,${
     e.clientY
   }px) rotate3d(1, 1, 1, 30deg) perspective(100px)`;
+
+  cursorX = e.clientX;
+  cursorY = e.clientY;
 });
 
 document.addEventListener("mouseleave", e => {
@@ -109,6 +114,20 @@ document.addEventListener("mouseenter", e => {
   stalker.style.opacity = "1";
   stalker2.style.opacity = "1";
 });
+document.addEventListener("mousedown", () => {
+  stalker.style.transform = `translate(${cursorX}px,${cursorY}px)
+  rotate3d(-1, 1, 0, 70deg) perspective(100px)
+  scale(1.5)`;
+  stalker2.style.transform = `translate(${cursorX}px,${cursorY}px)
+  rotate3d(1, 1, 1, -90deg) perspective(100px) scale(2)`;
+});
+document.addEventListener("mouseup", () => {
+  stalker.style.transform = `translate(${cursorX}px,${cursorY}px)
+  rotate3d(-1, -1, 0, 30deg) perspective(100px)
+  scale(1)`;
+  stalker2.style.transform = `translate(${cursorX}px,${cursorY}px)
+  rotate3d(1, 1, 1, 30deg) perspective(100px) scale(1)`;
+});
 </script>
 
 <style lang="scss">
@@ -117,7 +136,7 @@ body {
   position: relative;
   //position: fixed;
   width: 100%;
-  //cursor: none;
+  cursor: none;
   margin: 0;
   padding: 0;
   //@at-root
@@ -146,7 +165,7 @@ html {
   left: -4px; //座標調節（カーソル位置と円の中心を合わせる）
   width: 10px; //カーソルの直径
   height: 10px; //カーソルの直径
-  background: rgba(90, 86, 86, 0.75);
+  background: rgba(255, 255, 255, 0.7);
   //border-radius: 50%;
   z-index: 999;
   //transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
@@ -163,7 +182,7 @@ html {
   background: rgba(0, 0, 0, 0);
   //border-radius: 50%;
   //transform: translate(0, 0) rotate(30deg);
-  transition: transform 0.2s, opacity 0.3;
+  transition: transform 0.2s, opacity 0.3s;
   //animation: spin 5s linear infinite;
   transition-timing-function: ease-out;
   z-index: 999;
