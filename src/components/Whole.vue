@@ -16,6 +16,7 @@
     </transition>
     <div class="arrow" v-show="showArrow"></div>
     <article id="rights">abcdefghijk</article>
+    <Sandstorm/>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import Loading from "./Loading";
 import Top from "./Top";
 import Members from "./Members";
 import SS from "./SS";
+import Sandstorm from "./Sandstorm";
 
 export default {
   //name: "App",
@@ -31,7 +33,8 @@ export default {
     Loading,
     Top,
     Members,
-    SS
+    SS,
+    Sandstorm
   },
   data() {
     return {
@@ -111,7 +114,7 @@ body {
 }
 html {
   overflow-x: hidden;
-   overflow-y:scroll;
+  overflow-y: scroll;
 }
 .waiting {
   display: none;
