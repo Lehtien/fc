@@ -89,16 +89,18 @@ const stalker2 = document.createElement("div");
 stalker2.id = "stalker2";
 document.body.appendChild(stalker2);
 
+let i = 0;
 document.addEventListener("mousemove", e => {
+  i++;
   cursor.style.transform = `translate(${e.clientX}px,${
     e.clientY
   }px) rotate(45deg)`;
   stalker.style.transform = `translate(${e.clientX}px,${
     e.clientY
-  }px) rotate3d(-1, -1, 0, 30deg) perspective(100px)`;
+  }px) rotate3d(-1, -1, 0, ${30 + i}deg) perspective(100px)`;
   stalker2.style.transform = `translate(${e.clientX}px,${
     e.clientY
-  }px) rotate3d(1, 1, 1, 30deg) perspective(100px)`;
+  }px) rotate3d(1, 1, 1, ${30 + i}deg) perspective(100px)`;
 
   cursorX = e.clientX;
   cursorY = e.clientY;
@@ -122,6 +124,7 @@ document.addEventListener("mousedown", () => {
   rotate3d(1, 1, 1, -90deg) perspective(100px) scale(2)`;
 });
 document.addEventListener("mouseup", () => {
+  i = 0;
   stalker.style.transform = `translate(${cursorX}px,${cursorY}px)
   rotate3d(-1, -1, 0, 30deg) perspective(100px)
   scale(1)`;
