@@ -16,6 +16,7 @@
     </transition>
     <div class="arrow" v-show="showArrow"></div>
     <article id="rights">abcdefghijk</article>
+    <Fluid/>
     <Sandstorm/>
   </div>
 </template>
@@ -25,6 +26,7 @@ import Loading from "./Loading";
 import Top from "./Top";
 import Members from "./Members";
 import SS from "./SS";
+import Fluid from "./FluidBtm";
 import Sandstorm from "./Sandstorm";
 
 export default {
@@ -34,6 +36,7 @@ export default {
     Top,
     Members,
     SS,
+    Fluid,
     Sandstorm
   },
   data() {
@@ -120,12 +123,16 @@ body {
   //@at-root
   height: 100%;
 
-  background: rgb(0, 0, 0);
+  background: rgb(40, 78, 45);
   animation: fadeIn 1s ease 0s 1 normal;
 }
 html {
   overflow-x: hidden;
   overflow-y: scroll;
+}
+#whole {
+  background-image: url("./images/fluid.svg");
+  background-size: cover;
 }
 .waiting {
   display: none;
@@ -271,7 +278,7 @@ html {
 // All rights reserved
 #rights {
   text-align: center;
-  margin: 30px 0 30px 0;
+  margin: 30px 0 10px 0;
   color: rgba(255, 255, 255, 0.7);
 }
 </style>
