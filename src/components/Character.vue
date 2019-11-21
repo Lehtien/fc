@@ -39,6 +39,7 @@ export default {
       this.$parent.imgUri = event.target.src;
 
       const currentScrollY = window.pageYOffset;
+      this.$parent.currentY = currentScrollY;
       document.querySelector("body").style.position = "fixed";
       document.querySelector("body").style.top = `-${currentScrollY}px`;
     }

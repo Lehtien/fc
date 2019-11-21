@@ -77,18 +77,24 @@ export default {
 let cursorX;
 let cursorY;
 // cursol, stalker
+const pointer = document.createElement("div");
+pointer.id = "pointer";
+document.body.appendChild(pointer);
+
 const cursor = document.createElement("div"); //divタグを作成
 cursor.id = "cursor"; //IDを付与
-document.body.appendChild(cursor); //bodyの最後に挿入
+//document.body.appendChild(cursor); //bodyの最後に挿入
+pointer.appendChild(cursor);
 
 const stalker = document.createElement("div");
 stalker.id = "stalker";
-document.body.appendChild(stalker);
+//document.body.appendChild(stalker);
+pointer.appendChild(stalker);
 
 const stalker2 = document.createElement("div");
 stalker2.id = "stalker2";
-document.body.appendChild(stalker2);
-
+//document.body.appendChild(stalker2);
+pointer.appendChild(stalker2);
 let i = 0;
 document.addEventListener("mousemove", e => {
   i++;
@@ -160,6 +166,16 @@ html {
   display: none;
 }
 
+#pointer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
 #cursor {
   //transform: translate(0px, 0px);
   pointer-events: none;
@@ -189,7 +205,6 @@ html {
   //animation: spin 5s linear infinite;
   transition-timing-function: ease-out;
   z-index: 999;
-
   border: solid 1px #000000;
 }
 #stalker2 {

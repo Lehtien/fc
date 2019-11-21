@@ -41,7 +41,7 @@
         <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
       </div>
     </div>
-    <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri"/>
+    <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri" :currentY="currentY"/>
   </div>
 </template>
 
@@ -55,7 +55,8 @@ export default {
     return {
       showContent: false,
       imgUri: "",
-      isVisible: false
+      isVisible: false,
+      currentY: 0
     };
   },
   methods: {
@@ -73,6 +74,10 @@ export default {
       this.showContent = true;
       //console.log(this.$parent.showContent);
       this.imgUri = event.target.src;
+
+      this.currentY = window.pageYOffset;
+      document.querySelector("body").style.position = "fixed";
+      document.querySelector("body").style.top = `-${this.currentY}px`;
 
       //console.log(this.$parent.imgUri);
       //console.log(this.imgUri);

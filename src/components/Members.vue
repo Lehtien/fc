@@ -4,7 +4,7 @@
     <Character position="true" imgsrc="images/smpl1.jpg"/>
     <Character imgsrc="images/smpl1.jpg"/>
     <Character position="true" imgsrc="images/smpl1.jpg"/>
-    <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri"/>
+    <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri" :currentY="currentY"/>
   </section>
 </template>
 
@@ -22,7 +22,8 @@ export default {
     return {
       showContent: false,
       imgUri: "",
-      flg: false
+      flg: false,
+      currentY: 0
     };
   },
   methods: {

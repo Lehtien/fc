@@ -12,13 +12,14 @@
 export default {
   props: {
     imgUri: String,
-    showContent: Boolean
+    showContent: Boolean,
+    currentY: Number
   },
   methods: {
     closeModal: function() {
       document.querySelector("body").style.position = "relative";
       document.querySelector("body").style.top = "";
-      window.scrollTo(0, 400);
+      window.scrollTo(0, this.currentY);
       this.$emit("isS");
     }
   }
