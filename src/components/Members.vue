@@ -39,10 +39,11 @@ export default {
 
 <style lang="scss" scoped>
 h3 {
+  font-size: 10vw;
   font-style: italic;
   text-decoration: underline;
   position: relative;
-  left: 20px;
+  left: 5vw;
   transform: rotate(-5deg);
   display: inline-block;
   opacity: 0;
