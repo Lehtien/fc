@@ -1,0 +1,96 @@
+<template>
+  <canvas id="thrCanvas"></canvas>
+</template>
+
+<script>
+import * as THREE from "three";
+export default {
+  data() {
+    const scene = new THREE.Scene();
+    const renderer = null;
+    //const camera = new THREE.PerspectiveCamera(75, 600 / 400, 0.1, 1000);
+    let camera = "";
+    const light = new THREE.DirectionalLight(0xffffff);
+    const geometry = new THREE.TorusBufferGeometry(20, 6, 6, 10);
+    const material = new THREE.MeshBasicMaterial({
+      color: 0x008866,
+      wireframe: true
+    });
+    const mesh = new THREE.Mesh(geometry, material);
+    let width = 0;
+    let height = 0;
+    let aspect = 0;
+    return {
+      scene,
+      renderer,
+      camera,
+      light,
+      geometry,
+      material,
+      mesh,
+      width,
+      height,
+      aspect
+    };
+  },
+  mounted() {
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: document.querySelector("#thrCanvas")
+      //alpha: true
+    });
+    this.width = window.innerWidth * 0.2;
+    this.height = window.innerHeight * 0.2;
+    this.aspect = this.width / this.height;
+
+    this.mesh.position.set(0, -10, 0);
+
+    this.renderer.setSize(this.width, this.height);
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.camera = new THREE.PerspectiveCamera(45, this.aspect, 1, 1000);
+
+    //this.camera.position.set(0, 0, 2);
+    this.camera.position.set(0, 0, 100);
+
+    this.light.position.set(0, 0, 10);
+    this.scene.add(this.mesh);
+    this.scene.add(this.light);
+
+    //console.log(this.geometry.attributes.position.array);
+
+    this.animate();
+
+    // resize
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeDestroy: function() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+  methods: {
+    animate() {
+      requestAnimationFrame(this.animate);
+
+      this.mesh.rotation.x += 0.005;
+      this.mesh.rotation.y += 0.005;
+
+      this.renderer.render(this.scene, this.camera);
+    },
+    handleResize() {
+      this.width = window.innerWidth * 0.2;
+      this.height = window.innerHeight * 0.2;
+      this.aspect = this.width / this.height;
+
+      this.renderer.setSize(this.width, this.height);
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+#thrCanvas {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  //width: 10%;
+}
+</style>
+

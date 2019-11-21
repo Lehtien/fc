@@ -8,7 +8,7 @@
       <Members/>
       <SS/>
     </div>-->
-    <Top/>
+    <!-- <Top/>
     <Members/>
     <SS/>
     <transition name="toppage">
@@ -17,7 +17,8 @@
     <div class="arrow" v-show="showArrow"></div>
     <article id="rights">abcdefghijk</article>
     <Fluid/>
-    <Sandstorm/>
+    <Sandstorm/>-->
+    <ThreeD/>
   </div>
 </template>
 
@@ -28,6 +29,7 @@ import Members from "./Members";
 import SS from "./SS";
 import Fluid from "./FluidBtm";
 import Sandstorm from "./Sandstorm";
+import ThreeD from "./ThreeD";
 
 export default {
   //name: "App",
@@ -37,7 +39,8 @@ export default {
     Members,
     SS,
     Fluid,
-    Sandstorm
+    Sandstorm,
+    ThreeD
   },
   data() {
     return {
