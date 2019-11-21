@@ -17,9 +17,7 @@ export default {
       wireframe: true
     });
     const mesh = new THREE.Mesh(geometry, material);
-    let width = 0;
-    let height = 0;
-    let aspect = 0;
+    const size = 0;
     return {
       scene,
       renderer,
@@ -28,25 +26,23 @@ export default {
       geometry,
       material,
       mesh,
-      width,
-      height,
-      aspect
+      size
     };
   },
   mounted() {
     this.renderer = new THREE.WebGLRenderer({
-      canvas: document.querySelector("#thrCanvas")
-      //alpha: true
+      canvas: document.querySelector("#thrCanvas"),
+      alpha: true
     });
-    this.width = window.innerWidth * 0.2;
-    this.height = window.innerHeight * 0.2;
-    this.aspect = this.width / this.height;
+    this.size = window.innerWidth * 0.15;
+    //this.height = window.innerHeight * 0.2;
+    //this.aspect = this.width / this.height;
 
-    this.mesh.position.set(0, -10, 0);
+    //this.mesh.position.set(0, -10, 0);
 
-    this.renderer.setSize(this.width, this.height);
+    this.renderer.setSize(this.size, this.size);
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.camera = new THREE.PerspectiveCamera(45, this.aspect, 1, 1000);
+    this.camera = new THREE.PerspectiveCamera(45, 1, 1, 1000);
 
     //this.camera.position.set(0, 0, 2);
     this.camera.position.set(0, 0, 100);
@@ -75,11 +71,12 @@ export default {
       this.renderer.render(this.scene, this.camera);
     },
     handleResize() {
-      this.width = window.innerWidth * 0.2;
-      this.height = window.innerHeight * 0.2;
-      this.aspect = this.width / this.height;
+      //this.width = window.innerWidth * 0.2;
+      //this.height = window.innerHeight * 0.2;
+      //this.aspect = this.width / this.height
+      this.size = window.innerWidth * 0.15;
 
-      this.renderer.setSize(this.width, this.height);
+      this.renderer.setSize(this.size, this.size);
     }
   }
 };
@@ -90,7 +87,10 @@ export default {
   position: fixed;
   bottom: 0;
   left: 0;
-  //width: 10%;
+
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.5;
 }
 </style>
 

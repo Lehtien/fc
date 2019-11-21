@@ -8,7 +8,7 @@
       <Members/>
       <SS/>
     </div>-->
-    <!-- <Top/>
+    <Top/>
     <Members/>
     <SS/>
     <transition name="toppage">
@@ -17,7 +17,7 @@
     <div class="arrow" v-show="showArrow"></div>
     <article id="rights">abcdefghijk</article>
     <Fluid/>
-    <Sandstorm/>-->
+    <Sandstorm/>
     <ThreeD/>
   </div>
 </template>
