@@ -72,8 +72,6 @@ export default {
       } else {
         this.showArrow = true;
       }
-      //console.log("Y:" + this.scrollY);
-      //console.log(document.documentElement.scrollHeight - document.documentElement.clientHeight);
     }
   }
 };

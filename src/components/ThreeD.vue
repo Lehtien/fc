@@ -39,25 +39,19 @@ export default {
       alpha: true
     });
     this.size = window.innerWidth * 0.15;
-    //this.height = window.innerHeight * 0.2;
-    //this.aspect = this.width / this.height;
 
     //this.mesh.position.set(0, -10, 0);
 
     this.renderer.setSize(this.size, this.size);
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    //this.camera = new THREE.PerspectiveCamera(45, 1, 1, 1000);
 
-    //this.camera.position.set(0, 0, 2);
     this.camera.position.set(0, 0, 100);
 
     this.light.position.set(0, 0, 10);
     this.scene.add(this.mesh);
     this.scene.add(this.light);
 
-    //console.log(this.geometry.attributes.position.array);
     this.animate();
-
     // resize
     window.addEventListener("resize", this.handleResize);
   },
@@ -83,11 +77,7 @@ export default {
       this.renderer.render(this.scene, this.camera);
     },
     handleResize() {
-      //this.width = window.innerWidth * 0.2;
-      //this.height = window.innerHeight * 0.2;
-      //this.aspect = this.width / this.height
       this.size = window.innerWidth * 0.15;
-
       this.renderer.setSize(this.size, this.size);
     }
   }
@@ -102,7 +92,20 @@ export default {
 
   pointer-events: none;
   z-index: 1000;
-  opacity: 0.5;
+  //opacity: 0.5;
+  animation: opcty 15s infinite ease;
+}
+
+@keyframes opcty {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.1;
+  }
 }
 </style>
 
