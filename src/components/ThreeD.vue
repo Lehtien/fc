@@ -9,15 +9,17 @@ export default {
     const scene = new THREE.Scene();
     const renderer = null;
     //const camera = new THREE.PerspectiveCamera(75, 600 / 400, 0.1, 1000);
-    let camera = "";
+    const camera = new THREE.PerspectiveCamera(45, 1, 1, 1000);
     const light = new THREE.DirectionalLight(0xffffff);
     const geometry = new THREE.TorusBufferGeometry(20, 6, 6, 10);
     const material = new THREE.MeshBasicMaterial({
-      color: 0x008866,
+      color: "rgb(0, 200, 60)", //0x008866,
       wireframe: true
     });
     const mesh = new THREE.Mesh(geometry, material);
     const size = 0;
+    const blue = 0;
+    const flg = true;
     return {
       scene,
       renderer,
@@ -26,7 +28,9 @@ export default {
       geometry,
       material,
       mesh,
-      size
+      size,
+      blue,
+      flg
     };
   },
   mounted() {
@@ -42,7 +46,7 @@ export default {
 
     this.renderer.setSize(this.size, this.size);
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.camera = new THREE.PerspectiveCamera(45, 1, 1, 1000);
+    //this.camera = new THREE.PerspectiveCamera(45, 1, 1, 1000);
 
     //this.camera.position.set(0, 0, 2);
     this.camera.position.set(0, 0, 100);
@@ -52,7 +56,6 @@ export default {
     this.scene.add(this.light);
 
     //console.log(this.geometry.attributes.position.array);
-
     this.animate();
 
     // resize
@@ -67,6 +70,15 @@ export default {
 
       this.mesh.rotation.x += 0.005;
       this.mesh.rotation.y += 0.005;
+
+      // color change
+      if (this.flg) {
+        this.material.color.setStyle(`rgb(0, 200, ${this.blue++})`);
+        if (this.blue > 200) this.flg = false;
+      } else {
+        this.material.color.setStyle(`rgb(0, 200, ${this.blue--})`);
+        if (this.blue < 30) this.flg = true;
+      }
 
       this.renderer.render(this.scene, this.camera);
     },
