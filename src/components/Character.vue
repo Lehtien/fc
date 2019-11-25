@@ -115,13 +115,13 @@ $diff: -5px;
     opacity: 0;
   }
   #square.active {
-    transform: translateX(10px);
+    transform: translateX(5vw);
     transition: transform 1s, opacity 1s;
     opacity: 1;
   }
   .img {
     height: auto;
-    max-width: 60vw;
+    width: 60vw;
     position: absolute;
     left: 10px;
     top: 10px;
@@ -130,7 +130,7 @@ $diff: -5px;
     cursor: none;
   }
   .img.active {
-    transform: translateX(10px);
+    transform: translateX(5vw);
     transition: transform 2s, opacity 3s, box-shadow 1s;
     opacity: 1;
   }
@@ -181,7 +181,7 @@ $diff: -5px;
   }
   #square.active {
     //transform: translateX($pos);
-    right: 10px;
+    right: 3vw;
     transition: right 1s, opacity 1s;
     opacity: 1;
   }
@@ -200,7 +200,7 @@ $diff: -5px;
   }
   .img.active {
 
-    right: 20px;
+    right: 5vw;
     //transform: translateX($pos);
     transition: right 2s, transform 2s, opacity 3s, box-shadow 1s;
     opacity: 1;

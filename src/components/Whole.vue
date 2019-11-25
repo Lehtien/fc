@@ -152,7 +152,7 @@ body {
   //@at-root
   height: 100%;
 
-  background: rgb(40, 78, 45);
+  background: rgb(44, 44, 44);
   animation: fadeIn 1s ease 0s 1 normal;
 }
 html {
@@ -160,7 +160,7 @@ html {
   overflow-y: scroll;
 }
 #whole {
-  background-image: url("./images/fluid.svg");
+  //background-image: url("./images/fluid.svg");
   background-size: cover;
 }
 .waiting {
@@ -175,6 +175,10 @@ html {
   height: 100%;
   transform-style: preserve-3d;
   pointer-events: none;
+
+  @media screen and (max-width: 559px) {
+    //display: none;
+  }
 }
 
 #cursor {
@@ -186,9 +190,8 @@ html {
   width: 10px; //カーソルの直径
   height: 10px; //カーソルの直径
   background: rgba(255, 255, 255, 0.7);
-  //border-radius: 50%;
   z-index: 999;
-  //transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
+  opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 
@@ -203,7 +206,7 @@ html {
   //border-radius: 50%;
   //transform: translate(0, 0) rotate(30deg);
   transition: transform 0.2s, opacity 0.3s;
-  //animation: spin 5s linear infinite;
+  opacity: 0;
   transition-timing-function: ease-out;
   z-index: 999;
   border: solid 1px #000000;
@@ -216,22 +219,14 @@ html {
   width: 30px; //マウスストーカーの直径
   height: 30px; //マウスストーカーの直径
   background: rgba(0, 0, 0, 0);
-  //border-radius: 50%;
-  //transform: translate(0, 0) rotate(30deg);
+
+  opacity: 0;
   transition: transform 0.5s, opacity 0.5s;
   //animation: spin 5s linear infinite;
   transition-timing-function: ease-out;
   z-index: 999;
 
   border: solid 1px #ffffff;
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 // fade
