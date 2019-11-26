@@ -13,7 +13,7 @@ export default {
     const light = new THREE.DirectionalLight(0xffffff);
     const geometry = new THREE.TorusBufferGeometry(20, 6, 6, 10);
     const material = new THREE.MeshBasicMaterial({
-      color: "rgb(0, 200, 60)", //0x008866,
+      color: "rgb(0, 0, 0)", //0x008866,
       wireframe: true
     });
     const mesh = new THREE.Mesh(geometry, material);
@@ -67,10 +67,16 @@ export default {
 
       // color change
       if (this.flg) {
-        this.material.color.setStyle(`rgb(0, 200, ${this.blue++})`);
-        if (this.blue > 200) this.flg = false;
+        this.material.color.setStyle(
+          `rgb(${Math.floor(this.blue++ / 10)}, ${Math.floor(
+            this.blue++ / 10
+          )}, ${Math.floor(this.blue++ / 10)})`
+        );
+        if (this.blue > 2000) this.flg = false;
       } else {
-        this.material.color.setStyle(`rgb(0, 200, ${this.blue--})`);
+        this.material.color.setStyle(
+          `rgb(${Math.floor(this.blue-- / 10)}, ${Math.floor(this.blue-- / 10)}, ${Math.floor(this.blue-- / 10)})`
+        );
         if (this.blue < 30) this.flg = true;
       }
 
