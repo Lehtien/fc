@@ -137,8 +137,8 @@ $diff: -5px;
 
   .img.active.finish:hover {
     box-shadow: 6px 3px 3px rgba(255, 255, 255, 1);
-    transform: translate(calc(10px + #{$diff}), $diff);
-    transition: transform 1s, box-shadow 1s;
+    transform: translate(3vw, -1vw); //translate(calc(10px + #{$diff}), $diff);
+    transition: transform 1s, box-shadow 0.5s;
   }
 
   .chrName {
@@ -149,6 +149,7 @@ $diff: -5px;
     opacity: 0;
     color: beige;
     font-size: 4vw;
+    text-shadow: 5px 5px 1px #000000;
   }
   .chrName.active {
     transform: rotate3d(1, 1, 0, 30deg);
@@ -169,12 +170,12 @@ $diff: -5px;
   #square {
     background: #666;
     //width: 40%;
-    
+
     //height: 300px;
     //max-width: 60%;
     position: absolute;
-    right:-50px;
-    width:75vw;
+    right: -50px;
+    width: 75vw;
     /* transition: all 300ms 0s ease; */
     //transform: translateX(200%);
     opacity: 0;
@@ -189,7 +190,7 @@ $diff: -5px;
     height: auto;
     max-width: 60vw;
     position: absolute;
-    top:10px;
+    top: 10px;
     right: -100%;
     /*left: 0;
     top: 0;
@@ -199,7 +200,6 @@ $diff: -5px;
     cursor: none;
   }
   .img.active {
-
     right: 5vw;
     //transform: translateX($pos);
     transition: right 2s, transform 2s, opacity 3s, box-shadow 1s;
@@ -219,6 +219,7 @@ $diff: -5px;
     transform: translateY(-100px);
     opacity: 0;
     color: beige;
+    text-shadow: 5px 5px 1px #000000;
   }
   .chrName.active {
     transform: rotate3d(1, 1, 0, 30deg);

@@ -31,6 +31,8 @@ import Fluid from "./FluidBtm";
 import Sandstorm from "./Sandstorm";
 import ThreeD from "./ThreeD";
 
+import Stats from "stats.js";
+
 export default {
   //name: "App",
   components: {
@@ -75,6 +77,12 @@ export default {
     }
   }
 };
+const stats = new Stats();
+stats.domElement.style.position = "fixed";
+stats.domElement.style.top = "0px";
+stats.domElement.style.zIndex = 100;
+document.body.appendChild(stats.domElement);
+
 let cursorX;
 let cursorY;
 // cursol, stalker
@@ -111,6 +119,7 @@ document.addEventListener("mousemove", e => {
 
   cursorX = e.clientX;
   cursorY = e.clientY;
+  stats.update();
 });
 
 document.addEventListener("mouseleave", e => {
@@ -193,6 +202,8 @@ html {
   z-index: 999;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+  will-change: transform;
+
 }
 
 #stalker {
@@ -210,6 +221,8 @@ html {
   transition-timing-function: ease-out;
   z-index: 999;
   border: solid 1px #000000;
+  will-change: transform;
+
 }
 #stalker2 {
   pointer-events: none;
@@ -227,6 +240,8 @@ html {
   z-index: 999;
 
   border: solid 1px #ffffff;
+  will-change: transform;
+
 }
 
 // fade
