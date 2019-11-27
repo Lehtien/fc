@@ -105,17 +105,23 @@ stalker2.id = "stalker2";
 //document.body.appendChild(stalker2);
 pointer.appendChild(stalker2);
 let i = 0;
+let enableCall = true;
 document.addEventListener("mousemove", e => {
   i++;
   cursor.style.transform = `translate(${e.clientX}px,${
     e.clientY
   }px) rotate(45deg)`;
+
+  if (!enableCall) return;
+  enableCall = false;
   stalker.style.transform = `translate(${e.clientX}px,${
     e.clientY
   }px) rotate3d(-1, -1, 0, ${30 + i}deg) perspective(100px)`;
   stalker2.style.transform = `translate(${e.clientX}px,${
     e.clientY
   }px) rotate3d(1, 1, 1, ${30 + i}deg) perspective(100px)`;
+
+  setTimeout(() => (enableCall = true), 12);
 
   cursorX = e.clientX;
   cursorY = e.clientY;
@@ -203,7 +209,6 @@ html {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   will-change: transform;
-
 }
 
 #stalker {
@@ -222,7 +227,6 @@ html {
   z-index: 999;
   border: solid 1px #000000;
   will-change: transform;
-
 }
 #stalker2 {
   pointer-events: none;
@@ -241,7 +245,6 @@ html {
 
   border: solid 1px #ffffff;
   will-change: transform;
-
 }
 
 // fade
