@@ -8,7 +8,7 @@
       <Members/>
       <SS/>
     </div>-->
-    <Top/>
+    <!-- <Top/>
     <Members/>
     <SS/>
     <transition name="toppage">
@@ -18,7 +18,8 @@
     <article id="rights">abcdefghijk</article>
     <Fluid/>
     <Sandstorm/>
-    <ThreeD/>
+    <ThreeD/>-->
+    <Members/>
   </div>
 </template>
 
@@ -79,7 +80,7 @@ export default {
 };
 const stats = new Stats();
 stats.domElement.style.position = "fixed";
-stats.domElement.style.top = "0px";
+stats.domElement.style.top = "80vh";
 stats.domElement.style.zIndex = 100;
 document.body.appendChild(stats.domElement);
 
@@ -190,6 +191,7 @@ html {
   height: 100%;
   transform-style: preserve-3d;
   pointer-events: none;
+  z-index: 999;
 
   @media screen and (max-width: 559px) {
     //display: none;

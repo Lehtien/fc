@@ -10,13 +10,16 @@
       alt="NoImage"
     >
     <article class="chrName" :class="{active:isVisible}">{{charName}}</article>
-    <!-- <h1 class="centered" v-observe-visibility="visibilityChanged" :class='{active:isVisible}'>Scroll me</h1> -->
-    <!-- <div class="box" v-scroll="handleScroll"> -->
+    <CharSS/>
   </div>
 </template>
 
 <script>
+import CharSS from "./CharSS";
 export default {
+  components: {
+    CharSS
+  },
   props: {
     position: String,
     imgsrc: String,
