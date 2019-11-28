@@ -10,7 +10,7 @@
       alt="NoImage"
     >
     <article class="chrName" :class="{active:isVisible}">{{charName}}</article>
-    <CharSS/>
+    <CharSS :isVisible="isVisible" :position="position"/>
   </div>
 </template>
 

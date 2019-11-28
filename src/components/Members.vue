@@ -3,7 +3,7 @@
     <h3 :class="{txtmember:flg}" v-observe-visibility="visibilityChanged">MEMBERS</h3>
     <Character position="true" imgsrc="images/smpl1.jpg" charName="ABCDE"/>
     <Character imgsrc="images/smpl1.jpg"/>
-    <Character position="true" imgsrc="images/smpl1.jpg"/>
+    <Character position="true" imgsrc="images/smpl1.jpg" charName="ABCDE"/>
     <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri" :currentY="currentY"/>
   </section>
 </template>

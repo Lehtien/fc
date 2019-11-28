@@ -1,36 +1,17 @@
 <template>
-  <div id="charimg">
-    <div class="imgs">
-      <img src="images/smpl1.jpg" class="img1">
-      <img src="images/smpl1.jpg" class="img2">
-      <!-- <img src="images/smpl1.jpg" class="img3">
-      <img src="images/smpl1.jpg" class="img4">-->
-      <!-- <input
-      type="image"
-      class="img1"
-      :class="{active:isVisible, finish:finished}"
-      @click="openModal"
-      :src="imgsrc1"
-      alt="NoImage"
-    >
-    <input
-      type="image"
-      class="img1"
-      :class="{active:isVisible, finish:finished}"
-      @click="openModal"
-      :src="imgsrc1"
-      alt="NoImage"
-      >-->
-    </div>
+  <div id="charimg" :class="[{active:isVisible}, position ? 'T' : 'F']">
+    <img src="images/smpl1.jpg" class="img1">
+    <img src="images/smpl1.jpg" class="img2">
+    <img src="images/smpl1.jpg" class="img3">
+    <img src="images/smpl1.jpg" class="img4">
   </div>
 </template>
 
 <script>
 export default {
-  methods: {
-    visibilityChanged(isVisible, entry) {
-      this.isVisible = isVisible;
-    }
+  props: {
+    isVisible: Boolean,
+    position: String
   }
 };
 </script>
@@ -39,57 +20,79 @@ export default {
 <style lang="scss" scoped>
 @mixin imgstyle($flg) {
   position: absolute;
-  top: 0;
-  //display: grid;
-  //grid-template-columns: 1fr 1fr;
-  @if ($flg == l) {
-    left: 10vw;
-  } @else if($flg == r) {
-    right: 0;
-  }
-  //transform-style: preserve-3d;
-  perspective: 1000px;
-  perspective-origin: top;
-  width: 50vw;
+  top: 5%;
 
-  .imgs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  @if ($flg == l) {
+    left: 5%;
+  } @else if($flg == r) {
+    right: 25%;
   }
+  transform-style: preserve-3d;
+  perspective: 800px;
+  perspective-origin: top;
+  width: 20vw;
+  opacity: 0;
 
   img {
+    position: absolute;
     width: 100%;
-    //margin: 3% -7%;
     border: solid;
 
     @if ($flg == l) {
-      transform: translateZ(20vw) rotate3d(-0.5, 1, 0, 30deg);
+      transform: rotate3d(-0.5, 1, 0, 30deg);
     } @else if($flg == r) {
-      transform: translateZ(20vw) rotate3d(-0.5, -1, 0, 30deg);
+      transform: rotate3d(-0.5, -1, 0, 30deg);
     }
     transition: transform 1s;
+    will-change: transform;
   }
 
   .img1 {
-    grid-column: 1 / 2;
+    top: 0;
+    left: 0;
+
+    &:hover {
+      transform: translate3d(7vw, 3vw, 300px);
+    }
   }
   .img2 {
-    grid-column: 2 / 3;
+    top: 0;
+    left: 20vw;
+
+    &:hover {
+      transform: translate3d(-13vw, 3vw, 300px);
+    }
   }
-  img:hover {
-    box-shadow: 6px 3px 3px rgba(255, 255, 255, 1);
-    //transform: translate3d(3vw, -1vw, 100px);
-    position: absolute;
-    top: -10vw;
+  .img3 {
+    top: 18vw;
     left: 0;
-    transform: translateZ(0px);
-    transition: transform 1s, box-shadow 0.5s;
-    z-index: 1;
+
+    &:hover {
+      transform: translate3d(7vw, -15vw, 300px);
+    }
+  }
+  .img4 {
+    top: 18vw;
+    left: 20vw;
+
+    &:hover {
+      transform: translate3d(-13vw, -15vw, 300px);
+    }
   }
 }
 
-#charimg {
+// T is right position
+// F is left position
+#charimg.T {
   @include imgstyle(r);
+}
+#charimg.F {
+  @include imgstyle(l);
+}
+#charimg.active {
+  opacity: 1;
+  transition: opacity 1.5s;
+  transition-delay: 2.5s;
 }
 </style>
 
