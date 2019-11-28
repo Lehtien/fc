@@ -1,9 +1,10 @@
 <template>
   <div id="charimg" :class="[{active:isVisible}, position ? 'T' : 'F']">
-    <img src="images/smpl1.jpg" class="img1">
+    <!-- <img :src="chrss[0]" class="img1">
     <img src="images/smpl1.jpg" class="img2">
     <img src="images/smpl1.jpg" class="img3">
-    <img src="images/smpl1.jpg" class="img4">
+    <img src="images/smpl1.jpg" class="img4">-->
+    <img v-for="(image, index) in chrss" :src="image" :key="index" :class="'img' + index">
   </div>
 </template>
 
@@ -11,7 +12,11 @@
 export default {
   props: {
     isVisible: Boolean,
-    position: String
+    position: String,
+    chrss: Array
+  },
+  mounted() {
+    //console.log(this.chrss);
   }
 };
 </script>
@@ -47,7 +52,7 @@ export default {
     will-change: transform;
   }
 
-  .img1 {
+  .img0 {
     top: 0;
     left: 0;
 
@@ -55,7 +60,7 @@ export default {
       transform: translate3d(7vw, 3vw, 300px);
     }
   }
-  .img2 {
+  .img1 {
     top: 0;
     left: 20vw;
 
@@ -63,7 +68,7 @@ export default {
       transform: translate3d(-13vw, 3vw, 300px);
     }
   }
-  .img3 {
+  .img2 {
     top: 18vw;
     left: 0;
 
@@ -71,7 +76,7 @@ export default {
       transform: translate3d(7vw, -15vw, 300px);
     }
   }
-  .img4 {
+  .img3 {
     top: 18vw;
     left: 20vw;
 

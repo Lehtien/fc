@@ -1,9 +1,9 @@
 <template>
   <section>
     <h3 :class="{txtmember:flg}" v-observe-visibility="visibilityChanged">MEMBERS</h3>
-    <Character position="true" imgsrc="images/smpl1.jpg" charName="ABCDE"/>
-    <Character imgsrc="images/smpl1.jpg"/>
-    <Character position="true" imgsrc="images/smpl1.jpg" charName="ABCDE"/>
+    <Character position="true" imgsrc="images/smpl1.jpg" charName="ABCDE" :chrss="chrss[0]"/>
+    <Character imgsrc="images/smpl1.jpg" :chrss="chrss[0]"/>
+    <!-- <Character position="true" imgsrc="images/smpl1.jpg" charName="ABCDE" :chrss="chrss[0]"/> -->
     <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri" :currentY="currentY"/>
   </section>
 </template>
@@ -23,7 +23,8 @@ export default {
       showContent: false,
       imgUri: "",
       flg: false,
-      currentY: 0
+      currentY: 0,
+      chrss: []
     };
   },
   methods: {
@@ -33,6 +34,15 @@ export default {
     visibilityChanged(isVisible, entry) {
       this.flg = isVisible;
     }
+  },
+  created() {
+    const h = [
+      "images/smpl1.jpg",
+      "images/smpl1.jpg",
+      "images/smpl1.jpg",
+      "images/smpl1.jpg"
+    ];
+    this.chrss.push(h);
   }
 };
 </script>

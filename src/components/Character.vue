@@ -10,7 +10,7 @@
       alt="NoImage"
     >
     <article class="chrName" :class="{active:isVisible}">{{charName}}</article>
-    <CharSS :isVisible="isVisible" :position="position"/>
+    <CharSS :isVisible="isVisible" :position="position" :chrss="chrss"/>
   </div>
 </template>
 
@@ -23,7 +23,8 @@ export default {
   props: {
     position: String,
     imgsrc: String,
-    charName: String
+    charName: String,
+    chrss: Array
   },
   data() {
     return {
