@@ -10,7 +10,7 @@
           src="images/wallpaper.jpg"
           alt="NoImage"
         >
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input type="image" class="ss_img" @click="openModal" src="images/a1.png" alt="NoImage">
         <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
         <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
       </div>

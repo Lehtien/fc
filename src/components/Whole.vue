@@ -8,7 +8,7 @@
       <Members/>
       <SS/>
     </div>-->
-    <!-- <Top/>
+    <Top/>
     <Members/>
     <SS/>
     <transition name="toppage">
@@ -18,8 +18,7 @@
     <article id="rights">abcdefghijk</article>
     <Fluid/>
     <Sandstorm/>
-    <ThreeD/>-->
-    <Members/>
+    <ThreeD/>
   </div>
 </template>
 
@@ -168,7 +167,10 @@ body {
   //@at-root
   height: 100%;
 
-  background: rgb(44, 44, 44);
+  //background: rgb(44, 44, 44);
+  background-image: url("./images/plutomap1k.jpg");
+  background-attachment: fixed;
+  background-size: cover;
   animation: fadeIn 1s ease 0s 1 normal;
 }
 html {
@@ -176,7 +178,8 @@ html {
   overflow-y: scroll;
 }
 #whole {
-  //background-image: url("./images/fluid.svg");
+  background-image: url("./images/fluid.svg");
+  //background-attachment: fixed;
   background-size: cover;
 }
 .waiting {

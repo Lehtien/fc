@@ -44,7 +44,10 @@ export default {
   img {
     //z-index: 2;
     border: 2px #ff0000 solid;
-    width: 40vw;
+    //height: auto;
+    //width: auto;
+    max-height: 80vh;
+    max-width: 80vw;
   }
 }
 
