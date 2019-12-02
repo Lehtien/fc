@@ -32,6 +32,7 @@ import Sandstorm from "./Sandstorm";
 import ThreeD from "./ThreeD";
 
 import Stats from "stats.js";
+import { throttle } from "throttle-debounce";
 
 export default {
   //name: "App",
@@ -52,7 +53,7 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener("scroll", this.onScroll);
+    window.addEventListener("scroll", throttle(1000, this.onScroll));
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
