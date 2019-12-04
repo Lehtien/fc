@@ -53,7 +53,7 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener("scroll", throttle(1000, this.onScroll));
+    window.addEventListener("scroll", this.onScroll);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     // スクロール値の取得
-    onScroll() {
+    onScroll: throttle(100, function() {
       this.scrollY = window.pageYOffset;
       const windowBottom =
         document.documentElement.scrollHeight -
@@ -75,7 +75,7 @@ export default {
       } else {
         this.showArrow = true;
       }
-    }
+    })
   }
 };
 const stats = new Stats();

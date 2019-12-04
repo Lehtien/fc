@@ -4,7 +4,10 @@
     <img src="images/smpl1.jpg" class="img2">
     <img src="images/smpl1.jpg" class="img3">
     <img src="images/smpl1.jpg" class="img4">-->
-    <img v-for="(image, index) in chrss" :src="image" :key="index" :class="'img' + index">
+    <!-- <img v-for="(image, index) in chrss" :src="image" :key="index" :class="'img' + index"> -->
+    <div v-for="(image, index) in chrss" :key="index">
+      <img v-lazy="image" :class="'img' + index">
+    </div>
   </div>
 </template>
 

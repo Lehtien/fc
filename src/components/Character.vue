@@ -1,12 +1,14 @@
 <template>
-  <div class="imgblock" :class="[position ? 'L' : 'R']" v-observe-visibility="visibilityChanged">
+  <div class="imgblock" :class="[position ? 'L' : 'R']" 
+  v-observe-visibility="visibilityChanged"
+  v-lazy-container="{ selector: 'input' }">
     <canvas id="square" :class="{active:isVisible}"></canvas>
     <input
       type="image"
       class="img"
       :class="{active:isVisible, finish:finished}"
       @click="openModal"
-      :src="imgsrc"
+      :data-src="imgsrc"
       alt="NoImage"
     >
     <article class="chrName" :class="{active:isVisible}">{{charName}}</article>

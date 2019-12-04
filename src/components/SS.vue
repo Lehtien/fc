@@ -1,5 +1,5 @@
 <template>
-  <div v-observe-visibility="visibilityChanged">
+  <div v-observe-visibility="visibilityChanged" v-lazy-container="{ selector: 'input' }">
     <h3 :class="{activeSS:isVisible}">ScreenShots</h3>
     <div class="loop_ss" :class="{activeSS:isVisible}">
       <div class="ss">
@@ -7,38 +7,122 @@
           type="image"
           class="ss_img"
           @click="openModal"
-          src="images/wallpaper.jpg"
+          data-src="images/wallpaper.jpg"
           alt="NoImage"
         >
-        <input type="image" class="ss_img" @click="openModal" src="images/a1.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/a1.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
       </div>
       <div class="ss">
         <input
           type="image"
           class="ss_img"
           @click="openModal"
-          src="images/wallpaper.jpg"
+          data-src="images/wallpaper.jpg"
           alt="NoImage"
         >
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
       </div>
     </div>
     <div class="loop_ss_rev" :class="{activeSS:isVisible}">
       <div class="ss">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
       </div>
       <div class="ss">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
-        <input type="image" class="ss_img" @click="openModal" src="images/logo.png" alt="NoImage">
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
+        <input
+          type="image"
+          class="ss_img"
+          @click="openModal"
+          data-src="images/logo.png"
+          alt="NoImage"
+        >
       </div>
     </div>
     <Modal :showContent="showContent" @isS="isShow" :imgUri="imgUri" :currentY="currentY"/>

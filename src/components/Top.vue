@@ -1,6 +1,8 @@
 <template>
-  <div id="top">
-    <img id="img1" src="../assets/875earth.jpg">
+  <div id="top" v-lazy-container="{ selector: 'img' }">
+    <!-- <img id="img1" src="../assets/875earth.jpg"> -->
+    <img id="img1" data-src="images/logo.png">
+
     <h1>ABC</h1>
   </div>
 </template>
