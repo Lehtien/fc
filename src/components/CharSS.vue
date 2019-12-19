@@ -17,9 +17,6 @@ export default {
     isVisible: Boolean,
     position: String,
     chrss: Array
-  },
-  mounted() {
-    //console.log(this.chrss);
   }
 };
 </script>

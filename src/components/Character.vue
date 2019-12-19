@@ -1,7 +1,10 @@
 <template>
-  <div class="imgblock" :class="[position ? 'L' : 'R']" 
-  v-observe-visibility="visibilityChanged"
-  v-lazy-container="{ selector: 'input' }">
+  <div
+    class="imgblock"
+    :class="[position ? 'L' : 'R']"
+    v-observe-visibility="visibilityChanged"
+    v-lazy-container="{ selector: 'input' }"
+  >
     <canvas id="square" :class="{active:isVisible}"></canvas>
     <input
       type="image"
@@ -12,7 +15,9 @@
       alt="NoImage"
     >
     <article class="chrName" :class="{active:isVisible}">{{charName}}</article>
-    <CharSS :isVisible="isVisible" :position="position" :chrss="chrss"/>
+    <div v-if="drawable">
+      <CharSS :isVisible="isVisible" :position="position" :chrss="chrss"/>
+    </div>
   </div>
 </template>
 
@@ -31,7 +36,8 @@ export default {
   data() {
     return {
       isVisible: true,
-      finished: true
+      finished: true,
+      drawable: false // CharSS描画可否
     };
   },
   methods: {
@@ -85,6 +91,9 @@ export default {
     }
   },
   mounted() {
+    if (window.screen.width > 560) {
+      this.drawable = true;
+    }
     //this.canvas = document.getElementById("square");
     const canvas = document.getElementById("square");
     //this.ctx = this.canvas.getContext("2d");

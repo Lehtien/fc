@@ -168,21 +168,21 @@ body {
   //@at-root
   height: 100%;
 
-  //background: rgb(44, 44, 44);
-  background-image: url("./images/plutomap1k.jpg");
+  background: black;
+  /* background-image: url("./images/plutomap1k.jpg");
   background-attachment: fixed;
-  background-size: cover;
+  background-size: cover; */
   animation: fadeIn 1s ease 0s 1 normal;
 }
 html {
   overflow-x: hidden;
   overflow-y: scroll;
 }
-#whole {
-  background-image: url("./images/fluid.svg");
+//#whole {
+  //background-image: url("./images/fluid.svg");
   //background-attachment: fixed;
-  background-size: cover;
-}
+  //background-size: cover;
+//}
 .waiting {
   display: none;
 }
