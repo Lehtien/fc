@@ -8,6 +8,7 @@
       <Members/>
       <SS/>
     </div>-->
+    <!--
     <Top/>
     <Members/>
     <SS/>
@@ -19,6 +20,8 @@
     <Fluid/>
     <Sandstorm/>
     <ThreeD/>
+    -->
+    <FlickSS/>
   </div>
 </template>
 
@@ -30,6 +33,7 @@ import SS from "./SS";
 import Fluid from "./FluidBtm";
 import Sandstorm from "./Sandstorm";
 import ThreeD from "./ThreeD";
+import FlickSS from "./FlickSS";
 
 import Stats from "stats.js";
 import { throttle } from "throttle-debounce";
@@ -43,7 +47,8 @@ export default {
     SS,
     Fluid,
     Sandstorm,
-    ThreeD
+    ThreeD,
+    FlickSS
   },
   data() {
     return {
@@ -168,7 +173,7 @@ body {
   //@at-root
   height: 100%;
 
-  background: black;
+  background: #F6F7F8;
   /* background-image: url("./images/plutomap1k.jpg");
   background-attachment: fixed;
   background-size: cover; */
@@ -179,9 +184,9 @@ html {
   overflow-y: scroll;
 }
 //#whole {
-  //background-image: url("./images/fluid.svg");
-  //background-attachment: fixed;
-  //background-size: cover;
+//background-image: url("./images/fluid.svg");
+//background-attachment: fixed;
+//background-size: cover;
 //}
 .waiting {
   display: none;

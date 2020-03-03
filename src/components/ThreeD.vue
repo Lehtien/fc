@@ -72,14 +72,14 @@ export default {
             this.blue++ / 10
           )}, ${Math.floor(this.blue++ / 10)})`
         );
-        if (this.blue > 2000) this.flg = false;
+        if (this.blue > 1000) this.flg = false;
       } else {
         this.material.color.setStyle(
           `rgb(${Math.floor(this.blue-- / 10)}, ${Math.floor(
             this.blue-- / 10
           )}, ${Math.floor(this.blue-- / 10)})`
         );
-        if (this.blue < 1000) this.flg = true;
+        if (this.blue < 10) this.flg = true;
       }
 
       this.renderer.render(this.scene, this.camera);
