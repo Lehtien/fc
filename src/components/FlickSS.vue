@@ -8,8 +8,8 @@
       v-for="(image, index) in cards"
       :key="index"
       :style="cardStyle[index]"
-      v-touch:swipe="swipeHandler"
-      @mousedown="touchstart"
+      v-touch:swipe="swipe(this)"
+      @mousedown="touchstart($event, index)"
       @mousemove="touchmove"
       @mouseup="touchend"
       @mouseleave="touchend"
@@ -28,18 +28,15 @@ const ss = [
   // "https://upload.wikimedia.org/wikipedia/en/thumb/8/88/RWS_Tarot_02_High_Priestess.jpg/690px-RWS_Tarot_02_High_Priestess.jpg",
   // "https://upload.wikimedia.org/wikipedia/en/d/de/RWS_Tarot_01_Magician.jpg"
 ];
-const to = i => ({
-  x: 0,
-  y: i * -4,
-  scale: 1,
-  rot: -10 + Math.random() * 20,
-  delay: i * 100
-});
-const from = i => ({ x: 0, rot: 0, scale: 1.5, y: -1000 });
-// This is being used down there in the view, it interpolates rotation and scale into a css transform
-const trans = (r, s) =>
-  `perspective(1500px) rotateX(30deg) rotateY(${r /
-    10}deg) rotateZ(${r}deg) scale(${s})`;
+
+const translateX = (target, x) => {
+  const prevTransform = target;
+  const transX = `translate3d(${x}px,`;
+
+  target = prevTransform.replace(/translate3d\(.+?,/, transX);
+  //console.log(target);
+  return target;
+};
 
 export default {
   data() {
@@ -47,56 +44,89 @@ export default {
       gone: new Set(),
       cards: ss,
       cardStyle: [],
-      canDrag: false,
+      isDragging: false,
       prevPos: {
         x: 0,
         y: 0
-      }
+      },
+      currentPosX: 0
     };
   },
   methods: {
-    swipeHandler(direction) {
-      console.log(direction); // May be left / right / top / bottom
+    swipe(el) {
+      return (direction, event) => {
+        if (direction === "left") {
+          console.log("left");
+          // const prevTransform = el.event.target.style.transform
+          // const transX = `translate3d(${this.currentPosX}px,`;
+          // el.event.target.style.transform = prevTransform.replace(
+          //   /translate3d\(.+?,/,
+          //   transX
+          // );
+          //translateX(el.event.target.style.transform, this.currentPosX);
+          const style = el.event.target.style;
+          style.transform = translateX(style.transform, this.currentPosX);
+        }
+        if (direction === "right") {
+          console.log(direction, el.event.target);
+        }
+      };
     },
-    touchstart: function(e) {
-      this.canDrag = true;
-      this.targetCard = e.target;
+    touchstart: function(e, index) {
+      this.isDragging = true;
+      this.prevPos.x = e.clientX;
 
-      console.log("touch start:x:%d,%d", e.offsetX, e.offsetY);
-      console.log(e.target.offsetLeft);
-      this.prevPos.x = e.offsetX;
-      this.prevPos.y = e.offsetY;
+      const prevTransform = e.target.style.transform;
+      //.replace(/\)/g, "))")
+      //.split(/\)\s/);
+      e.target.style.transform = prevTransform.replace(
+        /rotateY.*scale\(.+\)/,
+        "rotateY(0) rotateZ(0) scale(1.1)"
+      );
+      e.target.style.zIndex = this.cardStyle.length - index;
+      //prevTransform + ` rotateX(30deg) rotateY(0) rotateZ(0) scale(1.1)`;
+      //e.target.style.scale = `0`;
     },
     touchmove: function(e) {
       // 押下中だったら
-      //console.log(e.clientX);
-      console.log(e.target.getBoundingClientRect().left);
-      if (this.canDrag) {
+      //console.log(e.target.getBoundingClientRect().left);
+      if (this.isDragging) {
         // 前回座標との差分を算出
-        const x = e.clientX - 200;
-        //console.log(`${e.offsetX} - ${this.prevPos.x} = ${x}`);
-        //console.log(e.pageX);
-        console.log(x);
-        e.target.style.transform = `translate3d(${x}px, -4px, 0) perspective(1500px)
-             rotateX(30deg) rotateY(0) rotateZ(0) scale(1)`;
+        //const x = e.clientX - this.prevPos.x;
+        this.currentPosX = e.clientX - this.prevPos.x;
 
-        //e.target.style.transform = `translateX(${moved_x}px)`;
-        // 全要素に差分を適用
-        //for (let line of this.list_line) {
-        //   line.x1 += moved_x;
-        //   line.x2 += moved_x;
-        //   line.y1 += moved_y;
-        //   line.y2 += moved_y;
-        // }
+        // const prevTransform = e.target.style.transform;
+        // const transX = `translate3d(${this.currentPosX}px,`;
 
-        // // 前回のクリック座標を更新
-        //this.prevPos.x = e.offsetX;
-        //this.prevPos.y = e.offsetY;
+        // e.target.style.transform = prevTransform.replace(
+        //   /translate3d\(.+?,/,
+        //   transX
+        // );
+        const style = e.target.style;
+        style.transform = translateX(style.transform, this.currentPosX);
+
+        e.target.style.transition = `transform 0s`;
+        // e.target.style.transform = `translate3d(${x}px, -4px, 0) perspective(1500px)
+        //     rotateX(30deg) rotateY(0) rotateZ(0) scale(1.1)`;
       }
     },
     touchend: function(e) {
-      this.canDrag = false;
-      console.log("touch end");
+      if (this.isDragging) {
+        const style = e.target.style;
+        style.transform = translateX(style.transform, 0);
+        //const prevTransform = e.target.style.transform;
+        //let changeTransform = prevTransform.replace(/\(.+?,/, `(0px,`); // translate3d-xの置換
+        let changeTransform = style.transform;
+        changeTransform = changeTransform.replace(/scale\(.+\)/, `scale(1)`); // scaleの置換
+
+        e.target.style.transform = changeTransform;
+        e.target.style.transition = `transform 1s`;
+
+        //e.target.style.zIndex = 0;
+
+        this.isDragging = false;
+        console.log(style.transform);
+      }
     }
   },
   mounted() {
@@ -104,12 +134,12 @@ export default {
       for (let i = 1; i < 3; i++) {
         const rot = -10 + Math.random() * 20;
 
-        const trans = `translate3d(0, ${-4 * i}px, 0) perspective(1500px) 
+        const trans = `translate3d(0, ${-4 * i}px, 0) perspective(1500px)
           rotateX(30deg) rotateY(${rot / 10}deg) rotateZ(${rot}deg) scale(1)`;
 
         const styleObj = {
-          transform: trans
-          //transition: `transform 1s ease-in-out ${0.2 * i}s`
+          transform: trans,
+          transition: `transform 1s ease-in-out ${0.2 * i}s`
         };
 
         this.cardStyle.push(styleObj);
@@ -146,9 +176,9 @@ export default {
   background-repeat: no-repeat;
   //background-position: center center;
   width: 45vh;
-  max-width: 300px;
+  max-width: 20vw;
   height: 85vh;
-  max-height: 570px;
+  max-height: 25vh;
   will-change: transform;
   border-radius: 10px;
   box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
