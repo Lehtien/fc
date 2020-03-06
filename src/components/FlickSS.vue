@@ -9,7 +9,7 @@
       :key="index"
       :style="cardStyle[index]"
       v-touch:swipe="swipe(index)"
-      @mousedown="touchstart($event, index)"
+      @mousedown="touchstart"
       @mousemove="touchmove"
       @mouseup="touchend"
       @mouseleave="touchend"
@@ -37,6 +37,18 @@ const translateX = (prevTransform, x) => {
     `translate3d(${x}px,`
   );
   return style;
+};
+
+const getMaxZIndex = () => {
+  const cards = document.querySelectorAll(".card");
+  const zIndex = [];
+  cards.forEach(card => {
+    const crZIndex = card.style.zIndex;
+    if (crZIndex !== "initial") {
+      zIndex.push(crZIndex);
+    }
+  });
+  return Math.max(...zIndex);
 };
 
 export default {
@@ -114,7 +126,7 @@ export default {
         }, 3000);
       });
     },
-    touchstart: function(e, index) {
+    touchstart: function(e) {
       if (e.target.dataset.canmove === "false") return;
 
       this.isDragging = true;
@@ -125,7 +137,7 @@ export default {
         /rotateY.*scale\(.+\)/,
         "rotateY(0) rotateZ(0) scale(1.1)"
       );
-      e.target.style.zIndex = this.cardStyle.length - index;
+      e.target.style.zIndex = getMaxZIndex() + 1;
     },
     touchmove: function(e) {
       // 押下中だったら

@@ -9,7 +9,7 @@ Vue.use(VueObserveVisibility);
 Vue.use(VueScrollTo, { duration: 500, easing: "ease" });
 Vue.use(VueLazyload, { preLoad: 1.8 });
 Vue.use(Vue2TouchEvents, {
-  swipeTolerance: 50
+  swipeTolerance: 150
 });
 
 Vue.config.productionTip = false;
