@@ -18,10 +18,10 @@
     <div class="arrow" v-show="showArrow"></div>
     <article id="rights">abcdefghijk</article>
     <Fluid/>
-    <Sandstorm/>
-    <ThreeD/>
-    -->
+    <Sandstorm/>    
     <FlickSS/>
+    -->
+    <ThreeD/>
   </div>
 </template>
 
