@@ -17,9 +17,8 @@ export default {
   data() {
     const scene = new THREE.Scene();
     const renderer = null;
-    const camera = new THREE.PerspectiveCamera(45, 600 / 400, 1, 10000);
-    const light = new THREE.DirectionalLight(0xffffff);
-    const clock = new THREE.Clock();
+    const camera = new THREE.PerspectiveCamera(45, 16 / 9, 1, 1000);
+    const light = new THREE.DirectionalLight(0xffffff, 1); //new THREE.SpotLight(0xffffff, 1, 1000, Math.PI / 4, 1);
     const world = new OIMO.World({
       timestep: 1 / 24,
       iterations: 8,
@@ -29,16 +28,19 @@ export default {
       info: false,
       gravity: [0, -9.8, 0]
     });
+    const boardHeight = 80;
+    const boardWidth = 80;
     return {
       scene,
       renderer,
       camera,
       light,
-      clock,
       world,
       physics: [],
-      cube: [],
-      board: ss
+      board: [],
+      boardSS: ss,
+      boardHeight,
+      boardWidth
     };
   },
   mounted() {
@@ -60,11 +62,12 @@ export default {
       });
 
       // boardの追加
+
       const intervalId = setInterval(() => {
         console.log(this.physics.length);
         const physics = this.world.add({
           type: "box",
-          size: [2, 30, 30],
+          size: [2, this.boardHeight, this.boardWidth],
           pos: [this.randomRange(-80, 80), 30, this.randomRange(-20, 20)],
           rot: [0, this.randomRange(0, 180), this.randomRange(45, 135)],
           move: true,
@@ -73,50 +76,10 @@ export default {
           restitution: 0.2
         });
         this.physics.push(physics);
-        if (this.physics.length >= this.board.length) clearInterval(intervalId);
-      }, 1000);
-
-      // this.physics[0] = this.world.add({
-      //   type: "box",
-      //   size: [1, 30, 30],
-      //   pos: [0, 0, 0],
-      //   rot: [0, -3, 20],
-      //   move: true,
-      //   density: 1,
-      //   friction: 0.5,
-      //   restitution: 0.2
-      // });
-
-      // this.physics[1] = this.world.add({
-      //   type: "box",
-      //   size: [1, 30, 30],
-      //   pos: [0, 50, 0],
-      //   rot: [0, 0, 45],
-      //   move: true,
-      //   density: 1,
-      //   friction: 0.5,
-      //   restitution: 0.2
-      // });
-      //this.world.postLoop = this.postLoop;
+        if (this.physics.length >= this.boardSS.length)
+          clearInterval(intervalId);
+      }, 2 * 1000);
     },
-    // postLoop() {
-    //   var m;
-    //   this.temp--;
-    //   const b = this.physics[0];
-    //   //this.physics.forEach(function(b, id) {
-    //   if (this.temp !== 0) return;
-    //   this.temp = 100;
-    //   if (b.type === 1) {
-    //     console.log(b.position || "none");
-    //     //if (b.sleeping) switchMat(m, "sleep");
-    //     //else switchMat(m, "move");
-    //     // if (m.position.y < -30) {
-    //     //   b.resetPosition(Math.rand(-5, 5), 30, Math.rand(-5, 5));
-    //     // }
-    //   }
-    //   //});
-    // },
-
     // 乱数を指定範囲内で取得
     randomRange(min, max) {
       return Math.random() * (max - min) + min;
@@ -131,83 +94,84 @@ export default {
 
       this.renderer.setSize(size, size);
       this.renderer.setPixelRatio(window.devicePixelRatio);
+      this.renderer.shadowMap.enabled = true;
 
       const radian = (90 * Math.PI) / 180;
-      this.camera.position.y = 10 * Math.sin(radian);
+      this.camera.position.y = 200 * Math.sin(radian);
       this.camera.position.z = 100 * Math.cos(radian);
+      //this.camera.position.x = 100;
       this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
       //this.camera.rotation.x = Math.PI;
 
-      this.light.position.set(0, 0, 1);
+      // Light Settings
+      this.light.position.set(0, 10, 5);
+      this.light.rotation.y = 100;
+      this.light.castShadow = true;
+      // Shadow Settings
+      this.light.shadow.camera.position.set(0, 100, 0);
+      this.light.shadow.camera.left = -100;
+      this.light.shadow.camera.right = 100;
+      this.light.shadow.camera.top = 100;
+      this.light.shadow.camera.bottom = -100;
+      //this.light.shadow.mapSize.width = 2048;
+      //this.light.shadow.mapSize.height = 2048;
+
+      this.scene.add(this.light);
+
+      // helper
+      var helper = new THREE.DirectionalLightHelper(this.light, 30);
+      this.scene.add(helper);
+      const lightHelper = new THREE.SpotLightHelper(this.light);
+      this.scene.add(lightHelper);
+      let cameraHelper = new THREE.CameraHelper(this.light.shadow.camera);
+      this.scene.add(cameraHelper);
+      var axes = new THREE.AxisHelper(1000);
+      this.scene.add(axes);
+
       this.createGround();
       this.createBoard();
-      // const texLoader = new THREE.TextureLoader();
-      // texLoader.crossOrigin = "*";
-      // texLoader.load(
-      //   "./images/smpl1.jpg",
-      //   texture => {
-      //     // onLoad
-      //     //const geometry = new THREE.PlaneGeometry(1, 1);
-      //     const geometry = new THREE.BoxGeometry(30, 30, 30);
-      //     const material = new THREE.MeshBasicMaterial({ map: texture });
-      //     this.cube = new THREE.Mesh(geometry, material);
-      //     this.scene.add(this.cube);
-      //     //this.cube.position.y = 20;
-      //     this.cube.rotation.x = 0;
-      //     this.cube.rotation.y = Math.PI / 4;
-      //   },
-      //   // onProgress callback currently not supported
-      //   undefined,
-      //   // onError callback
-      //   err => {
-      //     console.error("An error happened.");
-      //   }
-      // );
+
       this.tick();
     },
     // 床の生成
     createGround() {
       const groundGeo = new THREE.PlaneGeometry(300, 200);
-      const groundMat = new THREE.MeshBasicMaterial({ color: 0x6699ff });
+      const groundMat = new THREE.MeshStandardMaterial({
+        color: 0x6699ff,
+        roughness: 0.8
+      });
       const groundMesh = new THREE.Mesh(groundGeo, groundMat);
       groundMesh.position.y = -200;
       //groundMesh.rotation.y = Math.PI / 4;
       groundMesh.rotation.x = -Math.PI / 2;
+      groundMesh.receiveShadow = true;
       this.scene.add(groundMesh);
     },
     createBoard() {
       var loader = new THREE.TextureLoader();
       const texture = loader.load("./images/smpl1.jpg");
-      const geometry = new THREE.BoxGeometry(1, 30, 30);
-      const material = new THREE.MeshBasicMaterial({ map: texture });
-      // this.cube[0] = new THREE.Mesh(geometry, material);
-      // this.scene.add(this.cube[0]);
-      // this.cube[1] = new THREE.Mesh(geometry, material);
-      // this.scene.add(this.cube[1]);
-      // this.cube[2] = new THREE.Mesh(geometry, material);
-      // this.scene.add(this.cube[2]);
-      for (let i = 0; i < this.board.length; i++) {
-        this.cube.push(new THREE.Mesh(geometry, material));
-        this.scene.add(this.cube[i]);
+      const geometry = new THREE.BoxGeometry(
+        1,
+        this.boardHeight,
+        this.boardWidth
+      );
+      const material = new THREE.MeshLambertMaterial({ map: texture });
+      for (let i = 0; i < this.boardSS.length; i++) {
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.castShadow = true;
+
+        this.board.push(mesh);
+        this.scene.add(this.board[i]);
       }
-      var axes = new THREE.AxisHelper(100);
-      this.scene.add(axes);
     },
     tick() {
       this.world.step(); // 物理エンジンの時間を進める
-      // this.timeElapsed += this.clock.getDelta();
-      // if (this.timeElapsed > 5.0) {
-      //   this.timeElapsed = 0.0;
-      // }
-      //console.log(this.timeElapsed);
-      // this.cube[0].position.copy(this.physics[0].getPosition());
-      // this.cube[0].quaternion.copy(this.physics[0].getQuaternion());
-      // this.cube[1].position.copy(this.physics[1].getPosition());
-      // this.cube[1].quaternion.copy(this.physics[1].getQuaternion());
-      for (let i = 0; i < this.physics.length && i < this.cube.length; i++) {
-        this.cube[i].position.copy(this.physics[i].getPosition());
-        this.cube[i].quaternion.copy(this.physics[i].getQuaternion());
+
+      // boardに物理演算を適用
+      for (let i = 0; i < this.physics.length && i < this.board.length; i++) {
+        this.board[i].position.copy(this.physics[i].getPosition());
+        this.board[i].quaternion.copy(this.physics[i].getQuaternion());
       }
 
       this.renderer.render(this.scene, this.camera);
