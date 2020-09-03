@@ -10,7 +10,7 @@
   "dependencies": {
     "body-scroll-lock": "2.6.4",
     "cannon": "0.6.2",
-    "lazysizes": "5.2.0-beta1",
+    "lazysizes": "5.2.2",
     "node-sass": "4.13.0",
     "oimo": "1.0.9",
     "sass-loader": "8.0.0",
